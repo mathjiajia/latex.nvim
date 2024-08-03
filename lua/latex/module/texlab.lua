@@ -23,7 +23,10 @@ local close_env = function()
 			api.nvim_put({ "\\end{" .. text .. "}" }, "", false, true)
 		end, bufnr)
 	else
-		print("method workspace/executeCommand is not supported by any servers active on the current buffer")
+		vim.notify(
+			"method textDocument/executeCommand is not supported by any servers active on the current buffer",
+			vim.log.levels.WARN
+		)
 	end
 end
 
@@ -52,7 +55,10 @@ local toggle_star = function()
 			})
 		end, bufnr)
 	else
-		print("method workspace/executeCommand is not supported by any servers active on the current buffer")
+		vim.notify(
+			"method textDocument/executeCommand is not supported by any servers active on the current buffer",
+			vim.log.levels.WARN
+		)
 	end
 end
 
