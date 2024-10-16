@@ -43,23 +43,24 @@ L._defaults = {
 	},
 }
 
-function L.setup(args)
-	args = vim.tbl_deep_extend("force", L._defaults, args == nil and {} or args)
+function L.setup()
+	local conf = vim.g.latex_conf or {}
+	conf = vim.tbl_deep_extend("force", L._defaults, conf)
 	vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 		pattern = { "*.tex" },
 		callback = function()
-			L.conceals.init(args.conceals)
-			L.imaps.init(args.imaps, "tex")
-			L.surrounds.init(args.surrounds)
-			L.texlab.init(args.texlab)
+			L.conceals.init(conf.conceals)
+			L.imaps.init(conf.imaps, "tex")
+			L.surrounds.init(conf.surrounds)
+			L.texlab.init(conf.texlab)
 		end,
 	})
 	vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 		pattern = { "*.md" },
 		callback = function()
-			L.conceals.init(args.conceals)
-			L.imaps.init(args.imaps, "markdown")
-			L.surrounds.init(args.surrounds)
+			L.conceals.init(conf.conceals)
+			L.imaps.init(conf.imaps, "markdown")
+			L.surrounds.init(conf.surrounds)
 		end,
 	})
 	vim.api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, {

@@ -8,8 +8,44 @@ There is no reason to prefer this plugin to [VimTeX](https://github.com/lervag/v
 ```lua
 -- lazy.nvim
 {
-    "mathjiajia/latex.nvim",
-    config = true,
+  "mathjiajia/latex.nvim",
+  init = function()
+    vim.g.latex_conf = {
+      conceals = {
+        enabled = {
+          "amssymb",
+          "core",
+          "delim",
+          "font",
+          "greek",
+          "math",
+          -- "mleftright",
+          "script",
+        },
+        add = {},
+      },
+      imaps = {
+        enabled = false,
+        add = {},
+        default_leader = ";",
+      },
+      surrounds = {
+        enabled = true,
+        command = "c",
+        math = "$",
+        quotation = '"',
+      },
+      texlab = {
+        enabled = true,
+        build = "<M-b>",
+        forward = "<M-f>",
+        cancel_build = "<M-x>",
+        close_env = "]]",
+        change_env = "cse",
+        toggle_star = "tse",
+      },
+    }
+  end
 }
 ```
 
@@ -22,48 +58,10 @@ and `markdown` and `markdown_inline` for `.md` files.
 
 ## Configuration
 
-To use `latex.nvim` you need to put
+To use `latex.nvim` you need modify the global variable
 
 ```lua
-require("latex").setup()
-```
-
-somewhere in your config.
-This is equivalent to the following default configuration.
-
-```lua
-require("latex").setup({
-    conceals = {
-        enabled = {
-            "amssymb",
-            "delim",
-            "font",
-            "greek",
-            "math",
-            "script",
-    },
-    add = {},
-  },
-  imaps = {
-    enabled = true,
-    add = {},
-    default_leader = "`",
-  },
-  surrounds = {
-    enabled = false,
-    command = "c",
-    environment = "e",
-  },
-  texlab = {
-    enabled = true,
-    build = "<M-b>",
-    forward = "<M-f>",
-    cancel_build = "<M-x>",
-    close_env = "]]",
-    change_env = "cse",
-    toggle_star = "tse",
-  },
-})
+vim.g.latex_conf
 ```
 
 See below for more about configuring `imaps`.
@@ -83,10 +81,10 @@ The `imaps.add` table in `setup()` expects one of the following formats
   ["rhs"] = "lhs",
   -- the above is equivalent to
   ["rhs"] = {
-    lhs = "lhs",
-    leader = nil, -- will be replaced by default_leader
-    wrap_char = false,
-    context = nil -- will be replaced by one of require('latex').imaps.tex_math_mode or require('latex').imaps.markdown_math_mode
+  lhs = "lhs",
+  leader = nil, -- will be replaced by default_leader
+  wrap_char = false,
+  context = nil -- will be replaced by one of require('latex').imaps.tex_math_mode or require('latex').imaps.markdown_math_mode
   }
 }
 ```
@@ -104,9 +102,9 @@ for example the default mapping
 ```lua
 {
   ["\\mathbb"] = {
-    lhs = "B",
-    leader = "#",
-    wrap_char = true
+  lhs = "B",
+  leader = "#",
+  wrap_char = true
   }
  }
 ```
@@ -132,7 +130,7 @@ You can add your own concealed commands to the `conceals.add` table in the follo
 
 ```lua
 add = {
-    ["colon"] = ":",
+	["colon"] = ":",
 }
 ```
 
