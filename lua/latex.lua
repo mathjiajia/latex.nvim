@@ -34,9 +34,9 @@ L._defaults = {
 	},
 	texlab = {
 		enabled = true,
-		build = "<M-b>",
-		forward = "<M-f>",
-		cancel_build = "<M-x>",
+		build = "<leader>ll",
+		forward = "<leader>lf",
+		cancel_build = "<leader>lc",
 		close_env = "]]",
 		change_env = "cse",
 		toggle_star = "tse",
