@@ -3,15 +3,16 @@ local api, lsp = vim.api, vim.lsp
 local M = {}
 
 local close_env = function()
+	local win = api.nvim_get_current_win()
 	local bufnr = api.nvim_get_current_buf()
-	local texlab_client = lsp.get_clients({ bufnr = bufnr, name = "texlab" })[1]
-	if not texlab_client then
+	local client = lsp.get_clients({ bufnr = bufnr, name = "texlab" })[1]
+	if not client then
 		return vim.notify("Texlab client not found", vim.log.levels.ERROR)
 	end
 
-	texlab_client.request("workspace/executeCommand", {
+	client.request("workspace/executeCommand", {
 		command = "texlab.findEnvironments",
-		arguments = { lsp.util.make_position_params() },
+		arguments = { lsp.util.make_position_params(win, client.offset_encoding) },
 	}, function(err, result)
 		if err then
 			return vim.notify(err.code .. ": " .. err.message, vim.log.levels.ERROR)
@@ -26,15 +27,16 @@ local close_env = function()
 end
 
 local toggle_star = function()
+	local win = api.nvim_get_current_win()
 	local bufnr = api.nvim_get_current_buf()
-	local texlab_client = lsp.get_clients({ bufnr = bufnr, name = "texlab" })[1]
-	if not texlab_client then
+	local client = lsp.get_clients({ bufnr = bufnr, name = "texlab" })[1]
+	if not client then
 		return vim.notify("Texlab client not found", vim.log.levels.ERROR)
 	end
 
-	texlab_client.request("workspace/executeCommand", {
+	client.request("workspace/executeCommand", {
 		command = "texlab.findEnvironments",
-		arguments = { lsp.util.make_position_params() },
+		arguments = { lsp.util.make_position_params(win, client.offset_encoding) },
 	}, function(err, result)
 		if err then
 			return vim.notify(err.code .. ": " .. err.message, vim.log.levels.ERROR)
