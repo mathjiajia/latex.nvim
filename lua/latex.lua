@@ -39,7 +39,7 @@ L._defaults = {
 		cancel_build = "<leader>lc",
 		close_env = "]]",
 		change_env = "cse",
-		toggle_star = "tse",
+		toggle_star = "tss",
 	},
 }
 

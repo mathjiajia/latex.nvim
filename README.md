@@ -42,7 +42,7 @@ There is no reason to prefer this plugin to [VimTeX](https://github.com/lervag/v
         cancel_build = "<M-x>",
         close_env = "]]",
         change_env = "cse",
-        toggle_star = "tse",
+        toggle_star = "tss",
       },
     }
   end
