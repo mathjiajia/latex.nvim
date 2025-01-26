@@ -10,7 +10,7 @@ local close_env = function()
 		return vim.notify("Texlab client not found", vim.log.levels.ERROR)
 	end
 
-	client.request("workspace/executeCommand", {
+	client:request("workspace/executeCommand", {
 		command = "texlab.findEnvironments",
 		arguments = { lsp.util.make_position_params(win, client.offset_encoding) },
 	}, function(err, result)
@@ -34,7 +34,7 @@ local toggle_star = function()
 		return vim.notify("Texlab client not found", vim.log.levels.ERROR)
 	end
 
-	client.request("workspace/executeCommand", {
+	client:request("workspace/executeCommand", {
 		command = "texlab.findEnvironments",
 		arguments = { lsp.util.make_position_params(win, client.offset_encoding) },
 	}, function(err, result)
