@@ -3,7 +3,6 @@ local L = {}
 L.imaps = require("latex.module.imaps")
 L.conceals = require("latex.module.conceals")
 L.surrounds = require("latex.module.surrounds")
-L.texlab = require("latex.module.texlab")
 
 L.__index = L
 
@@ -32,15 +31,6 @@ L._defaults = {
 		math = "$",
 		quotation = '"',
 	},
-	texlab = {
-		enabled = true,
-		build = "<leader>ll",
-		forward = "<leader>lf",
-		cancel_build = "<leader>lc",
-		close_env = "]]",
-		change_env = "cse",
-		toggle_star = "tss",
-	},
 }
 
 function L.setup()
@@ -52,7 +42,6 @@ function L.setup()
 			L.conceals.init(conf.conceals)
 			L.imaps.init(conf.imaps, "tex")
 			L.surrounds.init(conf.surrounds)
-			L.texlab.init(conf.texlab)
 		end,
 	})
 	vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {

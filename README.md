@@ -35,15 +35,6 @@ There is no reason to prefer this plugin to [VimTeX](https://github.com/lervag/v
         math = "$",
         quotation = '"',
       },
-      texlab = {
-        enabled = true,
-        build = "<M-b>",
-        forward = "<M-f>",
-        cancel_build = "<M-x>",
-        close_env = "]]",
-        change_env = "cse",
-        toggle_star = "tss",
-      },
     }
   end
 }
